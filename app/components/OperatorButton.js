@@ -4,11 +4,11 @@ import { inputText, orangeBtn } from '../config/colours';
 
 export default OperatorButton = (props) => {
     return (
-        <View style={styles.btn}>
-            <TouchableOpacity>
+        <TouchableOpacity>
+            <View style={styles.btn}>
                 <Text style={styles.text}>{props.label}</Text>
-            </TouchableOpacity>
-        </View>
+            </View>
+        </TouchableOpacity>
     )
 }
 

@@ -4,11 +4,11 @@ import { inputText, grayBtn } from '../config/colours';
 
 export default FunctionButton = (props) => {
     return (
-        <View style={styles.btn}>
-            <TouchableOpacity>
+        <TouchableOpacity>
+            <View style={styles.btn}>
                 <Text style={styles.text}>{props.label}</Text>
-            </TouchableOpacity>
-        </View>
+            </View>
+        </TouchableOpacity>
     )
 }
 

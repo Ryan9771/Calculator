@@ -4,11 +4,11 @@ import { darkGray, inputText,  } from '../config/colours';
 
 export default NumberButton = (props) => {
     return (
-        <View style={styles.btn}>
-            <TouchableOpacity>
+        <TouchableOpacity onPress={() => props.handler(props.label)}>
+            <View style={styles.btn}>
                 <Text style={styles.text}>{props.label}</Text>
-            </TouchableOpacity>
-        </View>
+            </View>
+        </TouchableOpacity>
     )
 }
 
