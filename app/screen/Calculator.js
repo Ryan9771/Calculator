@@ -18,11 +18,11 @@ export default Calculator = () => {
     const [expr1, setExpr1] = useState(0);
     const [expr2, setExpr2] = useState(0);
     const [res, setRes] = useState(0);
-    const [text, setText] = useState('');
+    const [text, setText] = useState('0');
 
     function funcHandler(func) {
         switch(func) {
-            case "AC": setText('');
+            case "AC": setText('0');
         }
     }
 
@@ -33,20 +33,31 @@ export default Calculator = () => {
             return styles.textMedium;
         } else if (text.length === 9) {
             return styles.textSmall;
-        } else if (text.length < 11) {
+        } else if (text.length > 9 && text.length < 11) {
             return styles.textXSmall;
         } else {
             return styles.textXXSmall;
         }
     }
 
+    function commafy(num) {
+        var noComma = num.replace(/,/g, '');
+        var str = noComma.split('.');
+        if (str[0].length >= 4) {
+            str[0] = str[0].replace(/(\d)(?=(\d{3})+$)/g, '$1,');
+        }
+        if (str[1] && str[1].length >= 5) {
+            str[1] = str[1].replace(/(\d{3})/g, '$1 ');
+        }
+        return str.join('.');
+    }
+
     function numHandler(num) {
-        if (text.length < 12) {
-            if (mod(text.length + 1, 4) === 0) {
-                // Split text to separate commas
-                setText(text + ',' + num);
+        if (text.length < 11) {
+            if (text === '0') {
+                setText(num);
             } else {
-                setText(text + num);
+                setText(commafy(text + num));
             }
         }
     }
@@ -144,7 +155,8 @@ const styles = StyleSheet.create({
         height: "50%",
         position: "absolute",
         bottom: -90,
-        paddingHorizontal: 41,
+        paddingRight: 41,
+        paddingLeft: 30,
         textAlign: "right",
         color: name.inputText,
         fontWeight: "300",
