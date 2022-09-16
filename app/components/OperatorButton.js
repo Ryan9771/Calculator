@@ -1,12 +1,12 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { orangeBtn } from '../config/colours';
+import { inputText, orangeBtn } from '../config/colours';
 
 export default OperatorButton = (props) => {
     return (
         <View style={styles.btn}>
             <TouchableOpacity>
-
+                <Text style={styles.text}>{props.label}</Text>
             </TouchableOpacity>
         </View>
     )
@@ -20,5 +20,12 @@ const styles = StyleSheet.create({
         marginTop: 1,
         width: 77,
         height: 77,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    text: {
+        fontSize: 44,
+        color: inputText,
+        fontWeight: "500",
     }
 })

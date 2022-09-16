@@ -14,33 +14,33 @@ export default Calculator = () => {
             </View>
             <View style={styles.btnWrapper}>
                 <View style={styles.row}>
-                    <FunctionButton />
-                    <FunctionButton />
-                    <FunctionButton />
-                    <OperatorButton />
+                    <FunctionButton label="AC" />
+                    <FunctionButton label="±" />
+                    <FunctionButton label="%" />
+                    <OperatorButton label="÷" />
                 </View>
                 <View style={styles.row}>
-                    <NumberButton />
-                    <NumberButton />
-                    <NumberButton />
-                    <OperatorButton />
+                    <NumberButton label="7" />
+                    <NumberButton label="8" />
+                    <NumberButton label="9" />
+                    <OperatorButton label="x" />
                 </View>
                 <View style={styles.row}>
-                    <NumberButton />
-                    <NumberButton />
-                    <NumberButton />
-                    <OperatorButton />
+                    <NumberButton label="4" />
+                    <NumberButton label="5" />
+                    <NumberButton label="6" />
+                    <OperatorButton label="-" />
                 </View>
                 <View style={styles.row}>
-                    <NumberButton />
-                    <NumberButton />
-                    <NumberButton />
-                    <OperatorButton />
+                    <NumberButton label="1" />
+                    <NumberButton label="2" />
+                    <NumberButton label="3" />
+                    <OperatorButton label="+" />
                 </View>
                 <View style={styles.row}>
-                    <ZeroButton />
-                    <NumberButton />
-                    <OperatorButton />
+                    <ZeroButton label="0" />
+                    <NumberButton label="." />
+                    <OperatorButton label="=" />
                 </View>
             </View>
 
