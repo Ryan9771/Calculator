@@ -4,7 +4,7 @@ import { inputText, grayBtn } from '../config/colours';
 
 export default FunctionButton = (props) => {
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => props.handler(props.label)}>
             <View style={styles.btn}>
                 <Text style={styles.text}>{props.label}</Text>
             </View>
