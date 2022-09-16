@@ -22,14 +22,21 @@ export default Calculator = () => {
 
     function funcHandler(func) {
         switch(func) {
-            case "AC": setText('0');
+            case "AC": 
+                setText('0');
+                break;
+            case "±":
+                let num = parseFloat(text.replace(/,/g, '')) * -1;
+                setText(commafy(num.toString()));
+                break;
+            
         }
     }
 
     function getTextSize() {
         if (text.length < 7) {
             return styles.textBig;
-        } else if (text.length === 7) {
+        } else if (text.length === 7 || text.length === 8) {
             return styles.textMedium;
         } else if (text.length === 9) {
             return styles.textSmall;
@@ -77,7 +84,7 @@ export default Calculator = () => {
             <View style={styles.btnWrapper}>
                 <View style={styles.row}>
                     <FunctionButton label="AC" handler={funcHandler}/>
-                    <FunctionButton label="±" />
+                    <FunctionButton label="±" handler={funcHandler}/>
                     <FunctionButton label="%" />
                     <OperatorButton label="÷" />
                 </View>
