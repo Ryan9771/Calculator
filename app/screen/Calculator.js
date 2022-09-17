@@ -66,7 +66,7 @@ export default Calculator = () => {
             } else {
                 setText(commafy(text + num));
             }
-        }
+        } 
     }
 
 
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
         position: "absolute",
         bottom: -90,
         paddingRight: 41,
-        paddingLeft: 30,
+        paddingLeft: 10,
         textAlign: "right",
         color: name.inputText,
         fontWeight: "300",
