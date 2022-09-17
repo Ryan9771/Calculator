@@ -11,7 +11,7 @@ export default Calculator = () => {
 
     const [expr1, setExpr1] = useState(0);
     const [operator, setOperator] = useState(null);
-    const [expr2, setExpr2] = useState(0);
+    const [overwrite, setOverwrite] = useState(true);
     const [res, setRes] = useState(0);
     const [text, setText] = useState('0');
 
@@ -42,6 +42,7 @@ export default Calculator = () => {
     function opHandler(op) {
         setExpr1(parseFloat(text));
         setOperator(op);
+        setOverwrite(true);
     }
 
     
@@ -117,11 +118,12 @@ export default Calculator = () => {
      */
     function numHandler(num) {
         if (text.length < 11) {
-            if (text === '0' || operator !== null) {
+            if (text === '0' || operator !== null && overwrite) {
                 setText(num);
             } else {
                 setText(commafy(text + num));
             }
+            setOverwrite(false);
         } 
     }
 
