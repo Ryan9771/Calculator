@@ -31,7 +31,11 @@ export default Calculator = () => {
                 setText(commafy(num.toString()));
                 break;
             case "%":
+                let newNum = parseFloat(text.replace(/,/g, '')) / 100;
+                setText(commafy(newNum.toString()));
                 break;   
+            case '.':
+                break;
         }
     }
 
@@ -40,9 +44,15 @@ export default Calculator = () => {
      * Handles the operators
      */
     function opHandler(op) {
-        setExpr1(parseFloat(text));
-        setOperator(op);
-        setOverwrite(true);
+        if (expr1 !== 0) {
+            resHandler();
+            setOperator(op);
+            setOverwrite(true);
+        } else {
+            setExpr1(parseFloat(text));
+            setOperator(op);
+            setOverwrite(true);
+        }
     }
 
     
@@ -143,7 +153,7 @@ export default Calculator = () => {
                 <View style={styles.row}>
                     <FunctionButton label="AC" handler={funcHandler}/>
                     <FunctionButton label="±" handler={funcHandler}/>
-                    <FunctionButton label="%" />
+                    <FunctionButton label="%" handler={funcHandler}/>
                     <OperatorButton label="÷" handler={opHandler}/>
                 </View>
                 <View style={styles.row}>
@@ -166,7 +176,7 @@ export default Calculator = () => {
                 </View>
                 <View style={styles.row}>
                     <ZeroButton label="0" handler={numHandler}/>
-                    <NumberButton label="." />
+                    <NumberButton label="." handler={funcHandler}/>
                     <OperatorButton label="=" handler={resHandler}/>
                 </View>
             </View>
