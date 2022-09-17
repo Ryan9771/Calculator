@@ -4,7 +4,7 @@ import { inputText, orangeBtn } from '../config/colours';
 
 export default OperatorButton = (props) => {
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => props.handler(props.label)}>
             <View style={styles.btn}>
                 <Text style={styles.text}>{props.label}</Text>
             </View>

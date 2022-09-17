@@ -6,33 +6,81 @@ import OperatorButton from '../components/OperatorButton';
 import NumberButton from '../components/NumberButton';
 import ZeroButton from '../components/ZeroButton';
 
-function mod(num1, num2) {
-    if (num1 < num2) {
-        return -1;
-    }
-    return num1 - Math.floor(num1 / num2) * num2;
-}
 
 export default Calculator = () => {
 
     const [expr1, setExpr1] = useState(0);
+    const [operator, setOperator] = useState(null);
     const [expr2, setExpr2] = useState(0);
     const [res, setRes] = useState(0);
     const [text, setText] = useState('0');
 
+
+    /**
+     * Handles the light gray function inputs
+     */
     function funcHandler(func) {
         switch(func) {
             case "AC": 
                 setText('0');
+                setOperator(null);
+                setExpr1(0);
                 break;
             case "±":
                 let num = parseFloat(text.replace(/,/g, '')) * -1;
                 setText(commafy(num.toString()));
                 break;
-            
+            case "%":
+                break;   
         }
     }
 
+
+    /**
+     * Handles the operators
+     */
+    function opHandler(op) {
+        setExpr1(parseFloat(text));
+        setOperator(op);
+    }
+
+    
+    /**
+     * Handles the equals button
+     */
+    function resHandler() {
+        if (text === '') {
+            setOperator(null);
+        } else if (operator !== null) {
+            let exp2 = parseFloat(text);
+            let result;
+            switch (operator) {
+                case '+':
+                    result = expr1 + exp2;
+                    break;
+
+                case '-':
+                    result = expr1 - exp2;
+                    break;
+
+                case 'x':
+                    result = expr1 * exp2;
+                    break;
+
+                case '÷':
+                    result = expr1 / exp2;
+                    break;
+            }
+            setExpr1(result);
+            setText(result.toString());
+            setOperator(null);
+        }
+    }
+
+
+    /**
+     * Determines the styling of the numbers based on the text sizse
+     */
     function getTextSize() {
         if (text.length < 7) {
             return styles.textBig;
@@ -47,6 +95,10 @@ export default Calculator = () => {
         }
     }
 
+
+    /**
+     * Commafies the number
+     */
     function commafy(num) {
         var noComma = num.replace(/,/g, '');
         var str = noComma.split('.');
@@ -59,9 +111,13 @@ export default Calculator = () => {
         return str.join('.');
     }
 
+
+    /**
+     * Handles the number inputs, and relays it to the displayed text
+     */
     function numHandler(num) {
         if (text.length < 11) {
-            if (text === '0') {
+            if (text === '0' || operator !== null) {
                 setText(num);
             } else {
                 setText(commafy(text + num));
@@ -86,30 +142,30 @@ export default Calculator = () => {
                     <FunctionButton label="AC" handler={funcHandler}/>
                     <FunctionButton label="±" handler={funcHandler}/>
                     <FunctionButton label="%" />
-                    <OperatorButton label="÷" />
+                    <OperatorButton label="÷" handler={opHandler}/>
                 </View>
                 <View style={styles.row}>
                     <NumberButton label="7" handler={numHandler}/>
                     <NumberButton label="8" handler={numHandler}/>
                     <NumberButton label="9" handler={numHandler}/>
-                    <OperatorButton label="x" />
+                    <OperatorButton label="x" handler={opHandler}/>
                 </View>
                 <View style={styles.row}>
                     <NumberButton label="4" handler={numHandler}/>
                     <NumberButton label="5" handler={numHandler}/>
                     <NumberButton label="6" handler={numHandler}/>
-                    <OperatorButton label="-" />
+                    <OperatorButton label="-" handler={opHandler}/>
                 </View>
                 <View style={styles.row}>
                     <NumberButton label="1" handler={numHandler}/>
                     <NumberButton label="2" handler={numHandler}/>
                     <NumberButton label="3" handler={numHandler}/>
-                    <OperatorButton label="+" />
+                    <OperatorButton label="+" handler={opHandler}/>
                 </View>
                 <View style={styles.row}>
                     <ZeroButton label="0" handler={numHandler}/>
                     <NumberButton label="." />
-                    <OperatorButton label="=" />
+                    <OperatorButton label="=" handler={resHandler}/>
                 </View>
             </View>
 
