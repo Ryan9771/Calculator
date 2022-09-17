@@ -12,7 +12,6 @@ export default Calculator = () => {
     const [expr1, setExpr1] = useState(0);
     const [operator, setOperator] = useState(null);
     const [overwrite, setOverwrite] = useState(true);
-    const [res, setRes] = useState(0);
     const [text, setText] = useState('0');
 
 
@@ -35,6 +34,15 @@ export default Calculator = () => {
                 setText(commafy(newNum.toString()));
                 break;   
             case '.':
+                let decimalPresent = false;
+                for (let i = 0; i < text.length; i++) {
+                    if (text.charAt(i) === '.') {
+                        decimalPresent = true;
+                    }
+                }
+                if (!decimalPresent) {
+                    setText(text + '.');
+                }
                 break;
         }
     }
