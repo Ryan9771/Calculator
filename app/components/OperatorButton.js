@@ -1,14 +1,14 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
 import { inputText, orangeBtn } from '../config/colours';
 
 export default OperatorButton = (props) => {
     return (
-        <TouchableOpacity onPress={() => props.handler(props.label)}>
+        <TouchableHighlight onPress={() => props.handler(props.label)}>
             <View style={styles.btn}>
                 <Text style={styles.text}>{props.label}</Text>
             </View>
-        </TouchableOpacity>
+        </TouchableHighlight>
     )
 }
 

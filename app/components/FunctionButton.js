@@ -1,14 +1,14 @@
 import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
 import { inputText, grayBtn } from '../config/colours';
 
 export default FunctionButton = (props) => {
     return (
-        <TouchableOpacity onPress={() => props.handler(props.label)}>
+        <TouchableHighlight onPress={() => props.handler(props.label)}>
             <View style={styles.btn}>
                 <Text style={styles.text}>{props.label}</Text>
             </View>
-        </TouchableOpacity>
+        </TouchableHighlight>
     )
 }
 
