@@ -1,13 +1,27 @@
-import React from 'react';
-import { View, Text, TouchableHighlight, StyleSheet } from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import { Animated, View, Text, TouchableHighlight, StyleSheet } from 'react-native';
 import { inputText, orangeBtn } from '../config/colours';
 
+
 export default OperatorButton = (props) => {
+
+    const flash = useRef(new Animated.Value(0)).current;
+
     return (
-        <TouchableHighlight onPress={() => props.handler(props.label)}>
-            <View style={styles.btn}>
+        <TouchableHighlight onPress={() => {
+                flash.setValue(5);
+                props.handler(props.label);
+
+                Animated.timing(flash, {
+                    toValue: 0,
+                    duration: 500,
+                    useNativeDriver: false,
+                }).start();
+            }
+        }>
+            <Animated.View style={[styles.btn, {borderWidth: flash}]}>
                 <Text style={styles.text}>{props.label}</Text>
-            </View>
+            </Animated.View>
         </TouchableHighlight>
     )
 }
@@ -22,6 +36,7 @@ const styles = StyleSheet.create({
         height: 77,
         alignItems: "center",
         justifyContent: "center",
+        borderColor: "white",
     },
     text: {
         fontSize: 44,
